@@ -68,7 +68,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDto updateComment(Long postId, Long commentId, CommentDto commentRequest) {
-        // Retrieve post bi id
+//        // Retrieve post bi id
         Post post = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
 
         //Retrieve comment by id
@@ -77,6 +77,7 @@ public class CommentServiceImpl implements CommentService {
         if (!comment.getPost().getId().equals(post.getId())){
             throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Commment does not belongs to this post");
         }
+
 
         //update
         comment.setName(commentRequest.getName());
@@ -128,6 +129,21 @@ public class CommentServiceImpl implements CommentService {
 
         return comment;
     }
+
+    //Retrive comment post
+//    private Comment getCommentPost(Long postId, Long commentId, CommentDto commentRequest){
+//        // Retrieve post bi id
+//        Post post = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
+//
+//        //Retrieve comment by id
+//        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new ResourceNotFoundException("comment", "id" , commentId));
+//
+//        if (!comment.getPost().getId().equals(post.getId())){
+//            throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Commment does not belongs to this post");
+//        }
+//
+//        return comment;
+//    }
 
 
 
